@@ -6,12 +6,15 @@ using namespace std;
 
 int main()
 {   
-    string one, two, three, four, five, six, seven, eight, nine, ten;
+    string num;
     
     ofstream fout ("file.txt");
     cout << "Введите 10 чисел через пробел:";
-    cin >> one >> two >> three >> four >> five >> six >> seven >> eight >> nine >> ten;
-    fout << one << " " << two << " "  << three << " "  << four << " "  << five << " "  << six << " "  << seven << " "  << eight << " "  << nine << " "  << ten;
+    
+    for (int i = 0; i < 10; i++) {
+        cin >> num;
+        fout << num << " ";
+    }
     fout.close();
     
     string line;
