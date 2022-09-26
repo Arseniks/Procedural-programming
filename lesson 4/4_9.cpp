@@ -51,11 +51,10 @@ int main()
             cout << "В исходной системе счисления не может быть таких чисел";
         } else {
             vector <int> res;
-            while (to_ten != 1) {
+            while (to_ten > 0) {
                 res.push_back(to_ten % rad_new);
                 to_ten /= rad_new;
             }
-            res.push_back(1);
             reverse(res.begin(), res.end());
             for (int i: res) {
                 switch(i)
