@@ -1,0 +1,28 @@
+#include <iostream>
+#include <cmath>
+ 
+using namespace std;
+ 
+int main() {
+    int end;
+
+    cin >> end;
+    
+    for (int i = 2; i <= end; i++) {
+        if (i == 2 or i == 3) {
+            cout << i << " ";
+        } else if ((i % 2 != 0) and (i % 3 != 0) and i != 1) {
+            int w = true;
+            for (int j = 5; j <= sqrt(i); j += 2) {
+                if (i % j == 0) {
+                    int w = false;
+                }
+            }
+            if (w) {
+                cout << i << " ";
+            }
+        }
+    }
+ 
+    return 0;
+}
