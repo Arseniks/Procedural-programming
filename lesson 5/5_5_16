@@ -6,31 +6,31 @@
 
 using namespace std;
 
-int from_16(string ch) {
+int from_16(const string& str) {
     vector <int> ss16;
-    for(char i : ch) {
+    for(char i : str) {
         switch (i) {
-        case 'A':
-            ss16.push_back(10);
-            break;
-        case 'B':
-            ss16.push_back(11);
-            break;
-        case 'C':
-            ss16.push_back(12);
-            break;
-        case 'D':
-            ss16.push_back(13);
-            break;
-        case 'E':
-            ss16.push_back(14);
-            break;
-        case 'F':
-            ss16.push_back(15);
-            break;
-        default:
-            ss16.push_back(i);
-            break;
+            case 'A':
+                ss16.push_back(10);
+                break;
+            case 'B':
+                ss16.push_back(11);
+                break;
+            case 'C':
+                ss16.push_back(12);
+                break;
+            case 'D':
+                ss16.push_back(13);
+                break;
+            case 'E':
+                ss16.push_back(14);
+                break;
+            case 'F':
+                ss16.push_back(15);
+                break;
+            default:
+                ss16.push_back(i);
+                break;
         }
     }
     int ssk = 0;
@@ -42,45 +42,45 @@ int from_16(string ch) {
     return ssk;
 }
 
-int to_ss(int ch, int ss) {
+int to_ss(int str, int ss) {
     int ssk = 0;
     int i = 1;
-    while(ch > 0){
-        ssk = ssk + (ch % ss) * i;
+    while(str > 0){
+        ssk = ssk + (str % ss) * i;
         i = i * 10;
-        ch = int(ch / ss);
+        str = int(str / ss);
     }
     return ssk;
 }
 
 int main() {
-    ifstream file;
-    file.open("input.txt");
-    
-    string ch;
-    vector <string> ss1str;
+    ifstream fin;
+    fin.open("input.txt");
+
+    string str;
+    vector <string> in_16;
     vector <int> minus;
-    
-    while(!file.eof()) {
-        file >> ch;
-        ss1str.push_back(ch);
-        for (char i : ch){
+
+    while(!fin.eof()) {
+        fin >> str;
+        in_16.push_back(str);
+        for (char i : str){
             if (i > 'F') {
                 cout << "Некорректное число";
                 return 0;
             }
         }
-        if (ch[0] == '-') {
+        if (str[0] == '-') {
             minus.push_back(-1);
         }
         else {
             minus.push_back(1);
         }
     }
-    file.close();
-    
+    fin.close();
+
     int ss;
-    while (1) {
+    while (true) {
         cout << "Введите систему счисления от 2 до 9:";
         cin >> ss;
         if (ss < 2 or ss > 9) {
@@ -90,29 +90,27 @@ int main() {
             break;
         }
     }
-    
-    vector <int> ss1;
-    for (int i = 0;i < ss1str.size() - 1; i++){
-        string b = ss1str[i];
-        ss1.push_back(from_16(b));
+
+    vector <int> in_10;
+    for (int i = 0; i < in_16.size() - 1; i++){
+        string b = in_16[i];
+        in_10.push_back(from_16(b));
     }
-    
-    vector <int> ans;
-    for (int i = 0; i < ss1.size(); i++){
-        int b = ss1[i];
-        ans.push_back(to_ss(b, ss));
+
+    vector <int> res;
+    for (int i : in_10){
+        res.push_back(to_ss(i, ss));
     }
-    
-    ofstream file1;
-    
-    file1.open("output.txt");
-    
-    for (int i = 0; i < ans.size(); i++){
-        int b = ans[i] * minus[i];
-        file1 << b << " ";
+
+    ofstream fout;
+    fout.open("output.txt");
+
+    for (int i = 0; i < res.size(); i++){
+        int r = res[i] * minus[i];
+        fout << r << " ";
     }
-    
-    file1.close();
-    
+
+    fout.close();
+
     return 0;
 }
