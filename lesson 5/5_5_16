@@ -61,7 +61,7 @@ int main() {
     vector <string> in_16;
     vector <int> minus;
 
-    while(!fin.eof()) {
+    while (fin) {
         fin >> str;
         in_16.push_back(str);
         for (char i : str){
