@@ -2,6 +2,8 @@
 
 using namespace std;
 
+int RES = 0;
+
 void perestanovki(int t, int n, int a[]) {
     if (t == n - 1) {
         bool w = false;
@@ -13,9 +15,8 @@ void perestanovki(int t, int n, int a[]) {
         }
         if (w) {
             for (int i = 0; i < n; ++i) {
-                cout << a[i] << " ";
+                RES++;
             }
-            cout << endl;
         }
     } else {
         for (int j = t; j < n; ++j) {
@@ -38,7 +39,6 @@ int main() {
     
     perestanovki(0, n, a);
     
+    cout << RES;
     return 0;
 }
-
-
