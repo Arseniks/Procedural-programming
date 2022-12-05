@@ -1,8 +1,6 @@
 #include <iostream>
 
-
 using namespace std;
-
 
 #define m 37
 #define b 3

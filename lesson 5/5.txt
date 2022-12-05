@@ -1,0 +1,304 @@
+5.1
+#include <iostream>
+
+using namespace std;
+
+int NOD_1(int a , int b) {
+    while(a != 0 and b != 0) {
+        if(a > b)
+        {
+            a = a % b;
+        }
+        else
+        {
+            b = b % a;
+        }
+
+    }
+    return (a + b);
+}
+
+int NOD_2(int a, int b) {
+    while (a != b)
+        if (a > b) {
+            a -= b;
+        } else {
+            b -= a;
+        }
+    return a;
+}
+
+int main(void)
+{
+    int a, b;
+
+    cout << "Введите два числа:";
+    cin >> a >> b;
+
+    cout << NOD_1(a, b) << endl;
+    cout << NOD_2(a, b) << endl;
+
+
+  return 0;
+}
+
+5.2
+#include <iostream>
+using namespace std;
+
+int main()
+{
+
+    int n;
+    cout << "Введите число окончания:";
+    cin >> n;
+
+	int *a = new int[n + 1];
+	for (int i = 0; i <= n; i++)
+		a[i] = i;
+
+
+	for (int i = 2; i * i <= n; i++)
+	{
+		if (a[i])
+			for (int j = i*i; j <= n; j += i)
+				a[j] = 0;
+	}
+
+	for (int i = 2; i < n; i++)
+	{
+		if (a[i])
+		{
+			cout << a[i] << ' ';
+		}
+	}
+
+	return 0;
+}
+
+5.3.1
+#include <iostream>
+#include <fstream>
+#include <math.h>
+
+using namespace std;
+
+int main()
+{
+    string line;
+
+    fstream file("file.txt", ios::in | ios::out | ios::binary);
+
+    if (file.is_open()) {
+        while (file) {
+            if(file.get() == ' ')
+                {
+                    file.seekp(-1, file.cur);
+                    file.put('*');
+                    file.flush();
+                }
+        }
+    }
+    file.close();
+    return 0;
+}
+
+5.3.12
+#include <iostream>
+#include <fstream>
+#include <math.h>
+
+using namespace std;
+
+int main()
+{
+    ifstream file;
+    string line;
+    file.open("input.txt");
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            cout << line << endl;
+        }
+    }
+    file.close();
+    return 0;
+}
+
+5.4.1
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+int main()
+{
+    cout << "Введите число n:";
+
+    int n;
+    cin >> n;
+
+    double res = 0;
+
+    for(int i = 1; i < n + 1; i++) {
+        double sum_sin = 0;
+        for(int j = 1; j < i + 1; j++) {
+            sum_sin += sin(j);
+        }
+        res += (i / sum_sin);
+    }
+
+    cout << res;
+
+    return 0;
+}
+
+5.4.35
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    cout << "Введите строку s:";
+
+    string s;
+    s = "fg    fff f     ";
+
+    int m = 0;
+    int curr = 0;
+    for (char i: s) {
+        if (int(i) == int(' ')) {
+            curr++;
+        } else {
+            if (curr > m) {
+                m = curr;
+            }
+            curr = 0;
+        }
+    }
+    if (curr > m) {
+        m = curr;
+    }
+    cout << m;
+    return 0;
+}
+
+5.5.16
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <string>
+#include <cmath>
+
+using namespace std;
+
+int from_16(const string& str) {
+    vector <int> ss16;
+    for(char i : str) {
+        switch (i) {
+            case 'A':
+                ss16.push_back(10);
+                break;
+            case 'B':
+                ss16.push_back(11);
+                break;
+            case 'C':
+                ss16.push_back(12);
+                break;
+            case 'D':
+                ss16.push_back(13);
+                break;
+            case 'E':
+                ss16.push_back(14);
+                break;
+            case 'F':
+                ss16.push_back(15);
+                break;
+            default:
+                ss16.push_back(i);
+                break;
+        }
+    }
+    int ssk = 0;
+    int k = 0;
+    for (int i = ss16.size() - 1; i >= 0; i--){
+        ssk += ss16[i] * pow(16, k);
+        k++;
+    }
+    return ssk;
+}
+
+int to_ss(int str, int ss) {
+    int ssk = 0;
+    int i = 1;
+    while(str > 0){
+        ssk = ssk + (str % ss) * i;
+        i = i * 10;
+        str = int(str / ss);
+    }
+    return ssk;
+}
+
+int main() {
+    ifstream fin;
+    fin.open("input.txt");
+
+    string str;
+    vector <string> in_16;
+    vector <int> minus;
+
+    while (fin) {
+        fin >> str;
+        in_16.push_back(str);
+        for (char i : str){
+            if (i > 'F') {
+                cout << "Некорректное число";
+                return 0;
+            }
+        }
+        if (str[0] == '-') {
+            minus.push_back(-1);
+        }
+        else {
+            minus.push_back(1);
+        }
+    }
+    fin.close();
+
+    int ss;
+    while (true) {
+        cout << "Введите систему счисления от 2 до 9:";
+        cin >> ss;
+        if (ss < 2 or ss > 9) {
+            cout << "Некорректная система счисления" << endl;
+        continue;
+        } else {
+            break;
+        }
+    }
+
+    vector <int> in_10;
+    for (int i = 0; i < in_16.size() - 1; i++){
+        string b = in_16[i];
+        in_10.push_back(from_16(b));
+    }
+
+    vector <int> res;
+    for (int i : in_10){
+        res.push_back(to_ss(i, ss));
+    }
+
+    ofstream fout;
+    fout.open("output.txt");
+
+    for (int i = 0; i < res.size(); i++){
+        int r = res[i] * minus[i];
+        fout << r << " ";
+    }
+
+    fout.close();
+
+    return 0;
+}
+

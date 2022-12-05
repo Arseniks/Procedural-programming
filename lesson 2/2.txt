@@ -1,0 +1,140 @@
+2.1
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+    setlocale(0, "");
+    double pi = 3.14;
+    double R, r, h, l;
+    double V, S;
+
+    cout << "Введите R: ";
+    cin >> R;
+    cout << "Введите r: ";
+    cin >> r;
+    cout << "Введите h: ";
+    cin >> h;
+
+    if (R > 0 && r > 0 && h > 0 && R > r) {
+        l = sqrt((R - r) * (R - r) + h * h);
+        V = pi * h * (R * R + R * r + r * r) / 3;
+        S = pi * (R * R + (R + r) * l + r * r);
+
+        cout << "V = " << V << endl;
+        cout << "S = " << S << endl;
+    }
+    else {
+        cout << "Введены неверные данные" << endl;
+    }
+
+    return 0;
+}
+
+2.2
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+    setlocale(0, "");
+    double x, a;
+    double w;
+
+    cout << "Введите x: ";
+    cin >> x;
+    cout << "Введите a: ";
+    cin >> a;
+
+    if (abs(x) < 1 && x != 0) {
+        w = a * log(abs(x));
+        cout << "w = " << w << endl;
+    }
+    else if (abs(x) > 1 && a >= x * x) {
+        w = sqrt(a - x * x);
+        cout << "w = " << w << endl;
+    }
+    else {
+        cout << "Введены неверные данные" << endl;
+    }
+    return 0;
+}
+
+2.3
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+    setlocale(0, "");
+    double x, y, b;
+    double z;
+
+    cout << "Введите x: ";
+    cin >> x;
+    cout << "Введите y: ";
+    cin >> y;
+    cout << "Введите b: ";
+    cin >> b;
+
+    if (b - x >= 0 && b - y > 0) {
+        z = log(b - y) * sqrt(b - x);
+        cout << "z = " << z << endl;
+    }
+    else {
+        cout << "Введеные неверные данные" << endl;
+    }
+    return 0;
+}
+
+2.4
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    setlocale(0, "");
+    int N, endN;
+
+    cout << "Введите N: ";
+    cin >> N;
+    if (N > 0){
+        endN = N + 10;
+        for (int i = N; i < endN; i++) {
+            cout << i << endl;
+        }
+    }
+    else {
+        cout << "Введеные неверные данные" << endl;
+    }
+
+    return 0;
+}
+
+2.5
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    setlocale(0, "");
+    double y;
+    for (double x = -4; x <= 4; x = x + 0.5) {
+        if (x != 1) {
+            y = (x * x - 2 * x + 2) / (x - 1);
+            cout << "x = " << x << ": y = " << y << endl;
+        }
+        else {
+            cout << "Деление на 0" << endl;
+        }
+    }
+    return 0;
+}
