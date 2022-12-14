@@ -1,54 +1,6 @@
 # подключение нужных библиотек:
 import random
 import string
-from typing import List
-
-
-def vowels_counting(input_string: str) -> int:
-    """Подсчёт количества глассных букв в строке"""
-    vowels = ("a", "e", "i", "o", "u", "y")  # создаем список гласных букв vowels
-    total = 0  # присваиваем значение 0 переменной total
-    for s in input_string:  # цикл, проходящий по входной строке
-        if s in vowels:  # если буква входной строки есть в списке гласных букв
-            total += 1  # увеличиваем результат подсчёта гласных букв total на 1
-    return total  # возвращаем из функции подсчитанное количество гласных букв total
-
-
-def generate_random_matrix(size: int) -> List[List[str]]:
-    """Автоматическая генерация матрицы"""
-    result_matrix = []  # создаём пустой список result_matrix искомой матрицы
-    for i in range(size):  # цикл, перебирающий все номера строк матрицы (с 0 до M - 1)
-        matrix_string = []  # создаём пустой список matrix_string одной из строк матрицы
-        for j in range(size):  # цикл, перебирающий все номера столбцов матрицы (с 0 до M - 1)
-            # в массив matrix_string добавляем случайно сгенерированную, с помощи функции random.choice, строку длинной 4:
-            matrix_string.append("".join(random.choice(string.ascii_lowercase) for k in range(4)))
-        result_matrix.append(matrix_string)  # в массив result_matrix добавляем массив matrix_string
-    return result_matrix  # выводим сформированную случайно матрицу result_matrix
-
-
-def input_matrix(size: int) -> List[List[str]]:
-    """Ввод матрицы пользователем"""
-    result_matrix = []  # создаём пустой список result_matrix искомой матрицы
-    for i in range(size):  # цикл, перебирающий все номера строк матрицы (с 0 до M - 1)
-        matrix_string = []  # создаём пустой список matrix_string одной из строк матрицы
-        for j in range(size):  # цикл, перебирающий все номера столбцов матрицы (с 0 до M - 1)
-            print(f"Введите слово из 4 букв, которое будет находится в {i + 1} строке и {j + 1} столбце матрицы")  # выводим текст
-            word = input()  # считываем переменную word
-            while not word.isalpha() or len(word) != 4:  # пока word это не строка или длинна word отличается от 4
-                print("Неверный ввод, можно вводить только четырёхбуквенные слова")  # выводим текст
-                word = input()  # заново считываем переменную word
-            matrix_string.append(word)  # в массив matrix_string добавляем сгенерированную пользователем строку длинной 4:
-        result_matrix.append(matrix_string)  # в массив result_matrix добавляем массив matrix_string
-    return result_matrix  # выводим сформированную пользователем матрицу result_matrix
-
-
-def printing_matrix(inp_matrix: List[List[str]]) -> None:
-    """Вывод матрицы"""
-    for i in range(len(inp_matrix)):  # цикл, перебирающий все номера строк матрицы (с 0 до M - 1)
-        print('|', end=' ')  # выводим текст
-        for j in range(len(inp_matrix[i])):  # цикл, перебирающий все номера столбцов матрицы (с 0 до M - 1)
-            print(inp_matrix[i][j], end=" | ")  # выводим элементы матрицы, разделяя пробелом
-        print()  # выводим пробел
 
 
 if __name__ == "__main__":
@@ -72,16 +24,39 @@ if __name__ == "__main__":
     matrix = []  # создаём пустой список matrix
 
     if type_generation == 1:  # если пользователь выбрал 1 (автаматический ввод)
-        matrix = generate_random_matrix(M)  # вызываем функцию автоматической генерации матрицы generate_random_matrix
+        for i in range(M):  # цикл, перебирающий все номера строк матрицы (с 0 до M - 1)
+            matrix_string = []  # создаём пустой список matrix_string одной из строк матрицы
+            for j in range(M):  # цикл, перебирающий все номера столбцов матрицы (с 0 до M - 1)
+                # в массив matrix_string добавляем случайно сгенерированную, с помощи функции random.choice, строку длинной 4:
+                matrix_string.append("".join(random.choice(string.ascii_lowercase) for k in range(4)))
+            matrix.append(matrix_string)  # в массив matrix добавляем массив matrix_string
     if type_generation == 2:  # если пользователь выбрал 2 (пользовательский ввод матрицы)
-        matrix = input_matrix(M)  # вызываем функцию пользовательского ввода матрицы input_matrix
+        for i in range(M):  # цикл, перебирающий все номера строк матрицы (с 0 до M - 1)
+            matrix_string = []  # создаём пустой список matrix_string одной из строк матрицы
+            for j in range(M):  # цикл, перебирающий все номера столбцов матрицы (с 0 до M - 1)
+                print(f"Введите слово из 4 букв, которое будет находится в {i + 1} строке и {j + 1} столбце матрицы")  # выводим текст
+                word = input()  # считываем переменную word
+                while not word.isalpha() or len(word) != 4:  # пока word это не строка или длинна word отличается от 4
+                    print("Неверный ввод, можно вводить только четырёхбуквенные слова")  # выводим текст
+                    word = input()  # заново считываем переменную word
+                matrix_string.append(word)  # в массив matrix_string добавляем сгенерированную пользователем строку длинной 4:
+            matrix.append(matrix_string)  # в массив result_matrix добавляем массив matrix_string
 
-    printing_matrix(matrix)  # вызываем функцию печати матрицы printing_matrix
+    for i in range(M):  # цикл, перебирающий все номера строк матрицы (с 0 до M - 1)
+        print('|', end=' ')  # выводим текст
+        for j in range(M):  # цикл, перебирающий все номера столбцов матрицы (с 0 до M - 1)
+            print(matrix[i][j], end=" | ")  # выводим элементы матрицы, разделяя пробелом
+        print()  # выводим пробел
 
     result_array = []  # создаём пустой список result_array
+    vowels = ("a", "e", "i", "o", "u", "y")  # создаем список гласных букв vowels
     for i in matrix:  # цикл, проходящий по строкам матрицы
         for j in i:  # цикл, проходящий по строкам элементам строк матрицы
-            result_array.append(vowels_counting(j))  # добавляем в массив result_array количество гласных букв в каждом элементе матрицы
+            total = 0  # присваиваем значение 0 переменной total
+            for s in j:  # цикл, проходящий по входной строке
+                if s in vowels:  # если буква входной строки есть в списке гласных букв
+                    total += 1  # увеличиваем результат подсчёта гласных букв total на 1
+            result_array.append(total)  # добавляем в массив result_array количество гласных букв в каждом элементе матрицы
 
     result_array.sort()  # сортируем массив result_array по возрастанию
 
